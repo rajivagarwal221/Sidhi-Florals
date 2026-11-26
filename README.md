@@ -1,28 +1,58 @@
 # Sidhi Florals
 
-Billing, inventory and bouquet management for Sidhi Florals. Vite + React + Tailwind on the front, Supabase Postgres behind it — no API server, so the app opens in about a second.
-
-## Run locally
-1. `npm install`
-2. Copy `.env.example` to `.env` and fill in `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` (Supabase → Project Settings → API). The `.env` for the `sidhi-florals` project is already in place on this machine.
-3. `npm run dev`
-
-## Database
-Supabase project **sidhi-florals** (ref `jdgshudtqymneaaiabxm`, region ap-south-1). Migrations live in `supabase/migrations/` and are applied in this order: `0001_schema.sql`, `0003_views.sql`, `0002_functions.sql`, `0004_seed.sql` (seed is optional). They are already applied to the project.
-
-There is **no login**: the anon key has full read/write access. Keep the URL private.
-
-## Shop details on receipts
-Edit `src/config/shop.ts` (name, tagline, address, phone, GSTIN, footer).
-
-## Deploy (Vercel)
-Import the repo, framework "Vite", add the two `VITE_*` environment variables, deploy. `vercel.json` routes all paths to `index.html`.
-
-## Scripts
-- `npm run dev` / `npm run build` / `npm run preview`
-- `npm test` — Vitest (cart & bouquet math, BouquetBuilder)
-- `npm run typecheck`
-- `node scripts/make-icons.mjs` — regenerate PWA icons
+Billing, inventory and bouquet management for Sidhi Florals, a flower shop. Ring up flowers and bouquets, build custom bouquets, track stock and margins, manage customer credit and print or WhatsApp receipts. It installs as a PWA and talks to Supabase directly, with no API server, so it opens in about a second.
 
 ## Features
-Dashboard · Billing (flowers, ready bouquets with "can make N", custom bouquet builder, discounts, credit sales) · Inventory (stock, bouquet recipes, profit margins) · Customers + purchase history · Sales history · Reports (5 charts) · Credits & Dues · Receipt print / WhatsApp PDF · Calculator · PWA install.
+
+| Area | What it does |
+| --- | --- |
+| Dashboard | Today's sales, stock alerts and quick actions |
+| Billing | Flowers and ready bouquets (with "can make N" from current stock), custom bouquet builder, discounts, credit sales, quick bill generator |
+| Inventory | Stock levels, bouquet recipes, profit margins |
+| Customers | Customer list, purchase history, archiving |
+| Sales | Sales history with void and audit trail |
+| Reports | Five charts covering revenue, margins and best sellers |
+| Credits & Dues | Outstanding balances and repayments |
+| Receipts | Print, or share as a PDF over WhatsApp |
+| Extras | Built-in calculator, data backup, offline-ready PWA install |
+
+## Tech stack
+
+React + TypeScript + Vite, Tailwind CSS, TanStack Query, Supabase (Postgres, SQL functions and views), Vitest, Vercel.
+
+## Getting started
+
+```bash
+git clone https://github.com/rajivagarwal221/Sidhi-Florals.git
+cd Sidhi-Florals
+npm install
+cp .env.example .env     # VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY (Supabase > Project Settings > API)
+npm run dev              # http://localhost:5173
+```
+
+## Database
+
+SQL migrations are in `supabase/migrations/`. On a new Supabase project, run them in the SQL editor in this order: `0001_schema.sql`, `0003_views.sql`, `0002_functions.sql`, then `0005` to `0009` in numeric order.
+
+## Shop details on receipts
+
+Edit `src/config/shop.ts` (name, tagline, address, phone, GSTIN, footer).
+
+## Scripts
+
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Start the dev server |
+| `npm run build` | Typecheck and build to `dist/` |
+| `npm run preview` | Preview the production build |
+| `npm test` | Vitest: cart, bouquet and checkout rules, BouquetBuilder |
+| `npm run typecheck` | TypeScript check |
+| `node scripts/make-icons.mjs` | Regenerate PWA icons |
+
+## Deploy (Vercel)
+
+Import the repo with framework "Vite", add the two `VITE_*` environment variables and deploy. `vercel.json` sends every path to `index.html`.
+
+## Security
+
+The app has no login, and the Supabase anon key can read and write every table. Anyone who opens the deployed site can extract that key from the page. Before sharing the URL, add Supabase Auth (even a single shop login) and Row Level Security policies that only allow signed-in users.
