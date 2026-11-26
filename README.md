@@ -6,12 +6,12 @@ Billing, inventory and bouquet management for Sidhi Florals, a flower shop. Ring
 
 | Area | What it does |
 | --- | --- |
-| Dashboard | Today's sales, stock alerts and quick actions |
+| Dashboard | Today's revenue, stems sold, monthly revenue, bouquets this month, revenue chart |
 | Billing | Flowers and ready bouquets (with "can make N" from current stock), custom bouquet builder, discounts, credit sales, quick bill generator |
 | Inventory | Stock levels, bouquet recipes, profit margins |
 | Customers | Customer list, purchase history, archiving |
 | Sales | Sales history with void and audit trail |
-| Reports | Five charts covering revenue, margins and best sellers |
+| Reports | Five sales and margin charts |
 | Credits & Dues | Outstanding balances and repayments |
 | Receipts | Print, or share as a PDF over WhatsApp |
 | Extras | Built-in calculator, data backup, offline-ready PWA install |
